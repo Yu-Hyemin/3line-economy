@@ -1,0 +1,2532 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>3줄경제</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    :root {
+
+      --ink: #2E241E;
+      --soft: #9C8B7D;
+      --line: #EFE2D2;
+
+      --accent: rgb(255, 130, 50);
+      --accent2: rgb(254, 170, 58);
+
+      --accent-ink: #C85410;
+      --accent-soft: #FFF1E4;
+      --accent-line: #FBD3B0;
+
+      --paper: #FFF9F1;
+      --card: #FFFFFF;
+
+    }
+
+
+    html,
+    body {
+
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Pretendard",
+        "Noto Sans KR",
+        sans-serif;
+
+      color: var(--ink);
+
+      background: #FFF7EF;
+
+      -webkit-font-smoothing: antialiased;
+
+    }
+
+
+    /* ==========================================
+       APP
+    ========================================== */
+
+    .app {
+
+      width: 100%;
+      max-width: 480px;
+
+      height: 100dvh;
+
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+
+      background: var(--paper);
+
+      overflow: hidden;
+
+    }
+
+
+    /* ==========================================
+       HEADER
+    ========================================== */
+
+    .appbar {
+
+      flex: 0 0 auto;
+
+      padding:
+        16px 18px
+        12px;
+
+      text-align: center;
+
+      background: #ffffff;
+
+      border-bottom:
+        1px solid rgba(239, 226, 210, 0.7);
+
+      z-index: 10;
+
+    }
+
+
+    .brand {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      font-size: 24px;
+      font-weight: 850;
+
+      letter-spacing: -1px;
+
+      color: #111;
+
+    }
+
+
+    .brand-icon {
+
+      font-size: 27px;
+      line-height: 1;
+
+    }
+
+
+    .brand span {
+
+      color: var(--accent);
+
+    }
+
+
+    .tagline {
+
+      margin-top: 5px;
+
+      font-size: 12px;
+
+      color: #A89B91;
+
+    }
+
+
+    .date {
+
+      display: inline-block;
+
+      margin-top: 8px;
+
+      padding:
+        5px 12px;
+
+      border-radius: 999px;
+
+      background: var(--accent-soft);
+
+      color: var(--accent-ink);
+
+      font-size: 11px;
+      font-weight: 500;
+
+    }
+
+
+    /* ==========================================
+       FEED
+    ========================================== */
+
+    .feed {
+
+      flex: 1;
+
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      scroll-behavior: smooth;
+
+      padding:
+        18px 16px
+        22px;
+
+      scrollbar-width: none;
+
+    }
+
+
+    .feed::-webkit-scrollbar {
+
+      display: none;
+
+    }
+
+
+    /* ==========================================
+       SECTION TITLE
+    ========================================== */
+
+    .section-title {
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin:
+        3px 2px
+        10px;
+
+      font-size: 15px;
+      font-weight: 750;
+
+      color: var(--ink);
+
+    }
+
+
+    .section-title-left {
+
+      display: flex;
+      align-items: center;
+
+      gap: 8px;
+
+    }
+
+
+    .section-mark {
+
+      width: 4px;
+      height: 19px;
+
+      border-radius: 10px;
+
+      background: var(--accent);
+
+    }
+
+
+    .counter {
+
+      flex-shrink: 0;
+
+      padding:
+        3px 10px;
+
+      border-radius: 999px;
+
+      background: var(--accent-soft);
+
+      color: var(--accent-ink);
+
+      font-size: 11px;
+      font-weight: 600;
+
+    }
+
+
+    /* ==========================================
+       TODAY TERMS
+    ========================================== */
+
+    .terms {
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 8px;
+
+    }
+
+
+    .term-card {
+
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      min-height: 54px;
+
+      padding:
+        10px 12px;
+
+      border:
+        1px solid var(--accent-line);
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #FFF6EC,
+          #FFEBD5
+        );
+
+      box-shadow:
+        0 4px 10px
+        rgba(124, 63, 15, 0.04);
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s ease;
+
+    }
+
+
+    .term-card:active {
+
+      transform: scale(0.985);
+
+    }
+
+
+    .term-rank {
+
+      flex: 0 0 auto;
+
+      width: 28px;
+      height: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--accent2),
+          var(--accent)
+        );
+
+      color: #fff;
+
+      font-size: 12px;
+      font-weight: 800;
+
+    }
+
+
+    .term-body {
+
+      flex: 1;
+      min-width: 0;
+
+    }
+
+
+    .term-name {
+
+      color: var(--ink);
+
+      font-size: 14px;
+      font-weight: 800;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+    }
+
+
+    .term-badge {
+
+      flex: 0 0 auto;
+
+      padding:
+        3px 8px;
+
+      border:
+        1px solid var(--accent-line);
+
+      border-radius: 999px;
+
+      background: #fff;
+
+      color: var(--accent-ink);
+
+      font-size: 9.5px;
+
+      white-space: nowrap;
+
+    }
+
+
+    .term-arrow {
+
+      flex: 0 0 auto;
+
+      color: var(--accent);
+
+      font-size: 18px;
+
+    }
+
+
+    .term-note {
+
+      margin:
+        8px 3px
+        0;
+
+      text-align: right;
+
+      color: #A3958A;
+
+      font-size: 10px;
+
+    }
+
+
+    /* ==========================================
+       NEWS SECTION
+    ========================================== */
+
+    .news-section {
+
+      margin-top: clamp(24px, 5vh, 52px);
+
+      display: flex;
+      flex-direction: column;
+
+    }
+
+
+    /* ==========================================
+       SLIDER
+    ========================================== */
+
+    .slider-wrapper {
+
+      position: relative;
+
+      display: flex;
+      align-items: flex-start;
+
+    }
+
+
+    .slider {
+
+      width: 100%;
+
+      display: flex;
+
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+
+      overscroll-behavior-x: contain;
+
+      scrollbar-width: none;
+
+    }
+
+
+    .slider::-webkit-scrollbar {
+
+      display: none;
+
+    }
+
+
+    /* ==========================================
+       NEWS CARD
+    ========================================== */
+
+    .news-card {
+
+      flex: 0 0 100%;
+
+      width: 100%;
+
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+
+      padding:
+        16px 16px
+        14px;
+
+      display: flex;
+      flex-direction: column;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 20px;
+
+      background: var(--card);
+
+      box-shadow:
+        0 8px 22px
+        rgba(120, 50, 0, 0.08);
+
+      overflow: hidden;
+
+    }
+
+
+    .news-top {
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .news-category {
+
+      padding:
+        4px 9px;
+
+      border-radius: 999px;
+
+      background: var(--accent-soft);
+
+      color: var(--accent);
+
+      font-size: 10px;
+      font-weight: 700;
+
+    }
+
+
+    .card-count {
+
+      font-size: 11px;
+
+      color: #777;
+
+    }
+
+
+    /* ==========================================
+       TITLE
+    ========================================== */
+
+    .news-title {
+
+      margin-bottom: 13px;
+
+      font-size:
+        clamp(
+          16px,
+          4.5vw,
+          19px
+        );
+
+      line-height: 1.45;
+
+      letter-spacing: -0.35px;
+
+      color: #191919;
+
+      font-weight: 800;
+
+      word-break: keep-all;
+
+    }
+
+
+    /* ==========================================
+       NEWS INFO
+    ========================================== */
+
+    .news-info {
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 14px;
+
+      padding:
+        14px 13px;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #FFF6EC,
+          #FFF0E1
+        );
+
+    }
+
+
+    .info-block {
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 5px;
+
+    }
+
+
+    .info-label {
+
+      color: var(--accent-ink);
+
+      font-size:
+        clamp(
+          13px,
+          3.5vw,
+          14px
+        );
+
+      font-weight: 800;
+
+      letter-spacing: -0.2px;
+
+    }
+
+
+    .info-text {
+
+      color: #493B32;
+
+      font-size:
+        clamp(
+          12px,
+          3.3vw,
+          13.2px
+        );
+
+      line-height: 1.6;
+
+      word-break: keep-all;
+
+    }
+
+
+    /* ==========================================
+       KEYWORDS
+    ========================================== */
+
+    .keyword-area {
+
+      margin-top: 13px;
+
+      padding-top: 11px;
+
+      border-top:
+        1px solid #EFE8E1;
+
+    }
+
+
+    .keyword-label {
+
+      margin-bottom: 8px;
+
+      color: var(--accent-ink);
+
+      font-size:
+        clamp(
+          13px,
+          3.5vw,
+          14px
+        );
+
+      font-weight: 800;
+
+    }
+
+
+    .chips {
+
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 7px;
+
+    }
+
+
+    .chip {
+
+      padding:
+        6px 11px;
+
+      border:
+        1px solid var(--accent-line);
+
+      border-radius: 999px;
+
+      background: var(--accent-soft);
+
+      color: var(--accent-ink);
+
+      font: inherit;
+
+      font-size: 11px;
+      font-weight: 650;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.12s,
+        background 0.12s,
+        color 0.12s;
+
+    }
+
+
+    .chip:active {
+
+      transform: scale(0.96);
+
+      background: var(--accent);
+
+      border-color: var(--accent);
+
+      color: #fff;
+
+    }
+
+
+    .no-keyword {
+
+      color: #A3958A;
+
+      font-size: 11px;
+
+    }
+
+
+    /* ==========================================
+       SOURCE BUTTON
+    ========================================== */
+
+    .source-button {
+
+      display: block;
+
+      width: 100%;
+
+      margin-top: 13px;
+
+      padding: 9px;
+
+      border-radius: 999px;
+
+      background: var(--accent);
+
+      color: #fff;
+
+      text-align: center;
+      text-decoration: none;
+
+      font-size: 12px;
+      font-weight: 650;
+
+    }
+
+
+    .source-button:active {
+
+      background: #F26B15;
+
+    }
+
+
+    /* ==========================================
+       SLIDE ARROWS
+    ========================================== */
+
+    .nav-button {
+
+      position: absolute;
+
+      top: 50%;
+
+      z-index: 5;
+
+      width: 36px;
+      height: 36px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: none;
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--accent2),
+          var(--accent)
+        );
+
+      color: #fff;
+
+      box-shadow:
+        0 5px 12px
+        rgba(185, 85, 15, 0.22);
+
+      font-size: 22px;
+
+      transform:
+        translateY(-50%);
+
+      cursor: pointer;
+
+    }
+
+
+    .nav-prev {
+
+      left: -12px;
+
+    }
+
+
+    .nav-next {
+
+      right: -12px;
+
+    }
+
+
+    /* ==========================================
+       DOTS
+    ========================================== */
+
+    .dots {
+
+      min-height: 16px;
+
+      padding-top: 6px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 6px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .dot {
+
+      width: 7px;
+      height: 7px;
+
+      border: none;
+
+      border-radius: 999px;
+
+      background: var(--accent-line);
+
+      cursor: pointer;
+
+      transition:
+        width 0.22s,
+        background 0.22s;
+
+    }
+
+
+    .dot.on {
+
+      width: 20px;
+
+      background: var(--accent);
+
+    }
+
+
+    .news-guide {
+
+      padding:
+        1px 0
+        3px;
+
+      text-align: center;
+
+      color: #A7978C;
+
+      font-size: 10px;
+
+    }
+
+
+    /* ==========================================
+       BOTTOM SHEET
+    ========================================== */
+
+    .overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 100;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      background:
+        rgba(40, 20, 10, 0.42);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+
+    }
+
+
+    .overlay.show {
+
+      opacity: 1;
+      visibility: visible;
+
+    }
+
+
+    .bottom-sheet {
+
+      width: 100%;
+      max-width: 480px;
+
+      max-height: 78dvh;
+
+      overflow-y: auto;
+
+      padding:
+        13px 21px
+        calc(22px + env(safe-area-inset-bottom));
+
+      border-radius:
+        26px 26px
+        0 0;
+
+      background: #fff;
+
+      box-shadow:
+        0 -12px 30px
+        rgba(0, 0, 0, 0.16);
+
+      transform:
+        translateY(100%);
+
+      transition:
+        transform 0.28s
+        cubic-bezier(.22, .61, .36, 1);
+
+      scrollbar-width: none;
+
+    }
+
+
+    .overlay.show .bottom-sheet {
+
+      transform: translateY(0);
+
+    }
+
+
+    .handle {
+
+      width: 42px;
+      height: 4px;
+
+      margin:
+        0 auto
+        13px;
+
+      border-radius: 999px;
+
+      background: #D5CCC5;
+
+    }
+
+
+    .sheet-header {
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-bottom: 10px;
+
+      border-bottom:
+        1px solid #EEE6DF;
+
+    }
+
+
+    .sheet-label {
+
+      font-size: 14px;
+      font-weight: 750;
+
+      color: var(--ink);
+
+    }
+
+
+    .sheet-close {
+
+      border: none;
+
+      background: transparent;
+
+      color: #777;
+
+      font-size: 27px;
+      line-height: 1;
+
+      cursor: pointer;
+
+    }
+
+
+    .sheet-term {
+
+      margin-top: 16px;
+
+      color: var(--accent-ink);
+
+      font-size: 20px;
+      font-weight: 800;
+
+    }
+
+
+    .sheet-definition {
+
+      margin-top: 9px;
+
+      color: #493B32;
+
+      font-size: 13px;
+      line-height: 1.75;
+
+      white-space: pre-line;
+
+    }
+
+
+    /* ==========================================
+       LOADING
+    ========================================== */
+
+    .loading {
+
+      padding: 35px 15px;
+
+      text-align: center;
+
+      color: #A3958A;
+
+      font-size: 13px;
+
+    }
+
+
+    /* ==========================================
+       SMALL HEIGHT
+    ========================================== */
+
+    @media (max-height: 720px) {
+
+      .appbar {
+
+        padding:
+          10px 18px
+          9px;
+
+      }
+
+
+      .brand {
+
+        font-size: 21px;
+
+      }
+
+
+      .brand-icon {
+
+        font-size: 22px;
+
+      }
+
+
+      .tagline {
+
+        margin-top: 3px;
+
+        font-size: 10px;
+
+      }
+
+
+      .date {
+
+        margin-top: 5px;
+
+        padding:
+          3px 9px;
+
+        font-size: 9px;
+
+      }
+
+
+      .feed {
+
+        padding-top: 14px;
+
+      }
+
+
+      .term-card {
+
+        min-height: 48px;
+
+        padding:
+          8px 10px;
+
+      }
+
+
+      .term-rank {
+
+        width: 25px;
+        height: 25px;
+
+      }
+
+
+      .news-section {
+
+        margin-top: 18px;
+
+      }
+
+
+      .news-card {
+
+        padding: 13px;
+
+      }
+
+
+      .news-title {
+
+        margin-bottom: 9px;
+
+        font-size: 15px;
+
+      }
+
+
+      .news-info {
+
+        gap: 10px;
+
+        padding:
+          10px 11px;
+
+      }
+
+
+      .info-label,
+      .keyword-label {
+
+        font-size: 12px;
+
+      }
+
+
+      .info-text {
+
+        font-size: 11px;
+
+        line-height: 1.48;
+
+      }
+
+
+      .chip {
+
+        padding:
+          4px 8px;
+
+        font-size: 9.5px;
+
+      }
+
+
+      .source-button {
+
+        margin-top: 8px;
+
+        padding: 7px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="app">
+
+
+    <header class="appbar">
+
+      <div class="brand">
+
+        <span class="brand-icon">
+          🍊
+        </span>
+
+        <div>
+          3줄<span> 경제</span>
+        </div>
+
+      </div>
+
+
+      <div class="tagline">
+        오늘의 흐름을 짧고 쉽게
+      </div>
+
+
+      <div
+        class="date"
+        id="todayDate"
+      >
+        불러오는 중...
+      </div>
+
+    </header>
+
+
+
+    <main
+      class="feed"
+      id="feed"
+    >
+
+
+      <section class="terms-section">
+
+        <div class="section-title">
+
+          <div class="section-title-left">
+
+            <span class="section-mark"></span>
+
+            <span>
+              오늘의 핵심 키워드 TOP 3
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="terms"
+          id="topTerms"
+        >
+
+          <div class="loading">
+            키워드를 불러오는 중이에요 🍊
+          </div>
+
+        </div>
+
+
+        <div class="term-note">
+          ※ 오늘의 주요 뉴스에 등장한 핵심 키워드 기준
+        </div>
+
+      </section>
+
+
+
+      <section
+        class="news-section"
+        id="newsSection"
+      >
+
+        <div class="section-title">
+
+          <div class="section-title-left">
+
+            <span class="section-mark"></span>
+
+            <span>
+              오늘의 주요 뉴스
+            </span>
+
+          </div>
+
+
+          <span
+            class="counter"
+            id="counter"
+          >
+          </span>
+
+        </div>
+
+
+
+        <div class="slider-wrapper">
+
+
+          <button
+            class="nav-button nav-prev"
+            id="prevButton"
+            aria-label="이전 기사"
+          >
+            ‹
+          </button>
+
+
+          <div
+            class="slider"
+            id="slider"
+          >
+
+            <div class="loading">
+              뉴스를 불러오는 중이에요 🍊
+            </div>
+
+          </div>
+
+
+          <button
+            class="nav-button nav-next"
+            id="nextButton"
+            aria-label="다음 기사"
+          >
+            ›
+          </button>
+
+
+        </div>
+
+
+        <div
+          class="dots"
+          id="dots"
+        >
+        </div>
+
+
+        <div class="news-guide">
+          옆으로 넘겨서 하나씩 보세요 · 키워드는 톡! 🍊
+        </div>
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+
+  <!-- ==========================================
+       BOTTOM SHEET
+  =========================================== -->
+
+  <div
+    class="overlay"
+    id="overlay"
+  >
+
+
+    <div class="bottom-sheet">
+
+
+      <div class="handle"></div>
+
+
+      <div class="sheet-header">
+
+        <div class="sheet-label">
+          핵심 키워드 설명
+        </div>
+
+        <button
+          class="sheet-close"
+          id="sheetClose"
+          aria-label="닫기"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div
+        class="sheet-term"
+        id="sheetTerm"
+      >
+      </div>
+
+
+      <div
+        class="sheet-definition"
+        id="sheetDefinition"
+      >
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <script>
+
+
+    /* ==========================================
+       DATA
+    ========================================== */
+
+    let news = [];
+    let glossary = {};
+    let currentIndex = 0;
+
+
+    const slider =
+      document.getElementById("slider");
+
+    const counter =
+      document.getElementById("counter");
+
+    const dotsContainer =
+      document.getElementById("dots");
+
+
+    /* ==========================================
+       HTML ESCAPE
+    ========================================== */
+
+    function escapeHtml(value) {
+
+      const div =
+        document.createElement("div");
+
+      div.textContent =
+        value == null
+          ? ""
+          : String(value);
+
+      return div.innerHTML;
+
+    }
+
+
+    /* ==========================================
+       URL
+    ========================================== */
+
+    function normalizeUrl(value) {
+
+      if (!value) {
+        return "#";
+      }
+
+
+      const text =
+        String(value);
+
+
+      const markdownMatch =
+        text.match(
+          /\((https?:\/\/[^)]+)\)/
+        );
+
+
+      if (markdownMatch) {
+        return markdownMatch[1];
+      }
+
+
+      const normalMatch =
+        text.match(
+          /https?:\/\/[^\s\]]+/
+        );
+
+
+      if (normalMatch) {
+        return normalMatch[0];
+      }
+
+
+      return "#";
+
+    }
+
+
+    /* ==========================================
+       LOAD DATA
+    ========================================== */
+
+    async function loadData() {
+
+      try {
+
+        const newsResponse =
+          await fetch(
+            "data/news.json",
+            {
+              cache: "no-store"
+            }
+          );
+
+
+        if (!newsResponse.ok) {
+
+          throw new Error(
+            "news.json을 불러오지 못했습니다."
+          );
+
+        }
+
+
+        const newsData =
+          await newsResponse.json();
+
+
+        news =
+          newsData.news || [];
+
+
+        renderToday(
+          newsData.date
+        );
+
+
+        try {
+
+          const glossaryResponse =
+            await fetch(
+              "data/glossary.json",
+              {
+                cache: "no-store"
+              }
+            );
+
+
+          if (glossaryResponse.ok) {
+
+            glossary =
+              await glossaryResponse.json();
+
+          }
+
+        } catch (error) {
+
+          console.log(
+            "glossary.json 없음"
+          );
+
+        }
+
+
+        renderTopTerms();
+
+        renderNews();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        slider.innerHTML =
+          `
+            <div class="loading">
+              뉴스를 불러오지 못했어요.
+            </div>
+          `;
+
+
+        document
+          .getElementById("topTerms")
+          .innerHTML =
+          `
+            <div class="loading">
+              키워드를 불러오지 못했어요.
+            </div>
+          `;
+
+      }
+
+    }
+
+
+    /* ==========================================
+       DATE
+    ========================================== */
+
+    function renderToday(dateValue) {
+
+      let text = "";
+
+
+      if (dateValue) {
+
+        const match =
+          String(dateValue)
+            .match(
+              /(\d{4})-(\d{2})-(\d{2})/
+            );
+
+
+        if (match) {
+
+          text =
+            Number(match[2]) +
+            "월 " +
+            Number(match[3]) +
+            "일";
+
+        }
+
+      }
+
+
+      document
+        .getElementById("todayDate")
+        .textContent =
+          text
+            ? text + " · 오늘의 경제뉴스"
+            : "오늘의 경제뉴스";
+
+    }
+
+
+    /* ==========================================
+       KEYWORD RANKING
+    ========================================== */
+
+    function buildKeywordRanking() {
+
+      const counts = {};
+
+
+      news.forEach(
+        function(item) {
+
+          (item.keywords || [])
+            .forEach(
+              function(keyword) {
+
+                if (!keyword) {
+                  return;
+                }
+
+
+                counts[keyword] =
+                  (counts[keyword] || 0)
+                  + 1;
+
+              }
+            );
+
+        }
+      );
+
+
+      return Object
+        .keys(counts)
+
+        .map(
+          function(term) {
+
+            return {
+
+              term: term,
+
+              count:
+                counts[term]
+
+            };
+
+          }
+        )
+
+        .sort(
+          function(a, b) {
+
+            if (
+              b.count !== a.count
+            ) {
+
+              return (
+                b.count - a.count
+              );
+
+            }
+
+
+            return a.term.localeCompare(
+              b.term,
+              "ko"
+            );
+
+          }
+        )
+
+        .slice(
+          0,
+          3
+        );
+
+    }
+
+
+    /* ==========================================
+       TOP TERMS
+    ========================================== */
+
+    function renderTopTerms() {
+
+      const topTerms =
+        buildKeywordRanking();
+
+
+      const container =
+        document.getElementById(
+          "topTerms"
+        );
+
+
+      if (!topTerms.length) {
+
+        container.innerHTML =
+          `
+            <div class="loading">
+              오늘의 핵심 키워드가 없어요.
+            </div>
+          `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        topTerms
+
+          .map(
+            function(item, index) {
+
+              return `
+
+                <article
+                  class="term-card"
+                  data-term="${escapeHtml(item.term)}"
+                >
+
+                  <div class="term-rank">
+                    ${index + 1}
+                  </div>
+
+
+                  <div class="term-body">
+
+                    <div class="term-name">
+                      ${escapeHtml(item.term)}
+                    </div>
+
+                  </div>
+
+
+                  <div class="term-badge">
+                    기사 ${item.count}건
+                  </div>
+
+
+                  <div class="term-arrow">
+                    ›
+                  </div>
+
+                </article>
+
+              `;
+
+            }
+          )
+
+          .join("");
+
+
+      container
+        .querySelectorAll(
+          ".term-card"
+        )
+
+        .forEach(
+          function(card) {
+
+            card.addEventListener(
+              "click",
+              function() {
+
+                openSheet(
+                  card.dataset.term
+                );
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+
+    /* ==========================================
+       NEWS CARD
+    ========================================== */
+
+    function buildNewsCard(
+      item,
+      index
+    ) {
+
+      const keywords =
+        (item.keywords || [])
+
+          .map(
+            function(keyword) {
+
+              return `
+
+                <button
+                  class="chip"
+                  data-term="${escapeHtml(keyword)}"
+                >
+                  ${escapeHtml(keyword)}
+                </button>
+
+              `;
+
+            }
+          )
+
+          .join("");
+
+
+      const keywordContent =
+        keywords
+          ? keywords
+          : `
+              <span class="no-keyword">
+                이번 뉴스에는 별도의 핵심 용어가 없어요.
+              </span>
+            `;
+
+
+      return `
+
+        <article class="news-card">
+
+
+          <div class="news-top">
+
+
+            <span class="news-category">
+              경제
+            </span>
+
+
+            <span class="card-count">
+              ${index + 1} / ${news.length}
+            </span>
+
+
+          </div>
+
+
+
+          <h2 class="news-title">
+            ${escapeHtml(item.title)}
+          </h2>
+
+
+
+          <div class="news-info">
+
+
+            <div class="info-block">
+
+              <div class="info-label">
+                무슨 일이야?
+              </div>
+
+              <div class="info-text">
+                ${escapeHtml(item.what_happened)}
+              </div>
+
+            </div>
+
+
+
+            <div class="info-block">
+
+              <div class="info-label">
+                왜 중요해?
+              </div>
+
+              <div class="info-text">
+                ${escapeHtml(item.why_important)}
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+
+          <div class="keyword-area">
+
+
+            <div class="keyword-label">
+              핵심 키워드
+            </div>
+
+
+            <div class="chips">
+              ${keywordContent}
+            </div>
+
+
+          </div>
+
+
+
+          <a
+            class="source-button"
+            href="${escapeHtml(normalizeUrl(item.url))}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            기사 원문 보기 ↗
+          </a>
+
+
+        </article>
+
+      `;
+
+    }
+
+
+    /* ==========================================
+       HEIGHT EQUALIZE
+    ========================================== */
+
+    function equalizeCardHeights() {
+
+      const titles =
+        slider.querySelectorAll(
+          ".news-title"
+        );
+
+
+      const infos =
+        slider.querySelectorAll(
+          ".news-info"
+        );
+
+
+      if (!titles.length) {
+        return;
+      }
+
+
+      titles.forEach(
+        function(title) {
+
+          title.style.minHeight = "";
+
+        }
+      );
+
+
+      infos.forEach(
+        function(info) {
+
+          info.style.minHeight = "";
+
+        }
+      );
+
+
+      let maxTitleHeight = 0;
+      let maxInfoHeight = 0;
+
+
+      titles.forEach(
+        function(title) {
+
+          maxTitleHeight =
+            Math.max(
+              maxTitleHeight,
+              title.offsetHeight
+            );
+
+        }
+      );
+
+
+      infos.forEach(
+        function(info) {
+
+          maxInfoHeight =
+            Math.max(
+              maxInfoHeight,
+              info.offsetHeight
+            );
+
+        }
+      );
+
+
+      titles.forEach(
+        function(title) {
+
+          title.style.minHeight =
+            maxTitleHeight + "px";
+
+        }
+      );
+
+
+      infos.forEach(
+        function(info) {
+
+          info.style.minHeight =
+            maxInfoHeight + "px";
+
+        }
+      );
+
+    }
+
+
+    /* ==========================================
+       NEWS RENDER
+    ========================================== */
+
+    function renderNews() {
+
+      if (
+        !news ||
+        !news.length
+      ) {
+
+        slider.innerHTML =
+          `
+            <div class="loading">
+              수집된 뉴스가 없어요.
+            </div>
+          `;
+
+        return;
+
+      }
+
+
+      slider.innerHTML =
+        news
+
+          .map(
+            function(item, index) {
+
+              return buildNewsCard(
+                item,
+                index
+              );
+
+            }
+          )
+
+          .join("");
+
+
+      dotsContainer.innerHTML =
+        news
+
+          .map(
+            function(_, index) {
+
+              return `
+
+                <button
+                  class="dot"
+                  data-index="${index}"
+                  aria-label="${index + 1}번 기사"
+                >
+                </button>
+
+              `;
+
+            }
+          )
+
+          .join("");
+
+
+      slider
+        .querySelectorAll(
+          ".chip"
+        )
+
+        .forEach(
+          function(chip) {
+
+            chip.addEventListener(
+              "click",
+              function(event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+
+                openSheet(
+                  chip.dataset.term
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      dotsContainer
+        .querySelectorAll(
+          ".dot"
+        )
+
+        .forEach(
+          function(dot) {
+
+            dot.addEventListener(
+              "click",
+              function() {
+
+                goToNews(
+                  Number(
+                    dot.dataset.index
+                  )
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      requestAnimationFrame(
+        function() {
+
+          equalizeCardHeights();
+
+          updateSliderUI();
+
+        }
+      );
+
+    }
+
+
+    /* ==========================================
+       SLIDER
+    ========================================== */
+
+    function getCurrentSlideIndex() {
+
+      const cards =
+        slider.querySelectorAll(
+          ".news-card"
+        );
+
+
+      if (!cards.length) {
+
+        return 0;
+
+      }
+
+
+      const cardWidth =
+        cards[0]
+          .getBoundingClientRect()
+          .width || 1;
+
+
+      return Math.min(
+
+        Math.max(
+
+          Math.round(
+            slider.scrollLeft
+            / cardWidth
+          ),
+
+          0
+
+        ),
+
+        cards.length - 1
+
+      );
+
+    }
+
+
+    function updateSliderUI() {
+
+      currentIndex =
+        getCurrentSlideIndex();
+
+
+      counter.textContent =
+        (currentIndex + 1)
+        + " / "
+        + news.length;
+
+
+      const dots =
+        dotsContainer
+          .querySelectorAll(
+            ".dot"
+          );
+
+
+      dots.forEach(
+        function(dot, index) {
+
+          dot.classList.toggle(
+            "on",
+            index === currentIndex
+          );
+
+        }
+      );
+
+    }
+
+
+    function goToNews(index) {
+
+      if (index < 0) {
+
+        index =
+          news.length - 1;
+
+      }
+
+
+      if (
+        index >= news.length
+      ) {
+
+        index = 0;
+
+      }
+
+
+      const cards =
+        slider.querySelectorAll(
+          ".news-card"
+        );
+
+
+      if (!cards.length) {
+
+        return;
+
+      }
+
+
+      const width =
+        cards[0]
+          .getBoundingClientRect()
+          .width;
+
+
+      slider.scrollTo({
+
+        left:
+          width * index,
+
+        behavior:
+          "smooth"
+
+      });
+
+    }
+
+
+    document
+      .getElementById(
+        "prevButton"
+      )
+
+      .addEventListener(
+        "click",
+        function() {
+
+          goToNews(
+            currentIndex - 1
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "nextButton"
+      )
+
+      .addEventListener(
+        "click",
+        function() {
+
+          goToNews(
+            currentIndex + 1
+          );
+
+        }
+      );
+
+
+    let sliderTick =
+      false;
+
+
+    slider.addEventListener(
+      "scroll",
+      function() {
+
+        if (
+          sliderTick
+        ) {
+
+          return;
+
+        }
+
+
+        sliderTick =
+          true;
+
+
+        requestAnimationFrame(
+          function() {
+
+            updateSliderUI();
+
+            sliderTick =
+              false;
+
+          }
+        );
+
+      }
+    );
+
+
+    /* ==========================================
+       BOTTOM SHEET
+    ========================================== */
+
+    const overlay =
+      document.getElementById(
+        "overlay"
+      );
+
+
+    const sheetTerm =
+      document.getElementById(
+        "sheetTerm"
+      );
+
+
+    const sheetDefinition =
+      document.getElementById(
+        "sheetDefinition"
+      );
+
+
+    function openSheet(term) {
+
+      const definition =
+        glossary[term]
+        || "용어 설명은 준비 중이에요.";
+
+
+      sheetTerm.textContent =
+        term;
+
+
+      sheetDefinition.textContent =
+        definition;
+
+
+      overlay
+        .classList
+        .add(
+          "show"
+        );
+
+    }
+
+
+    function closeSheet() {
+
+      overlay
+        .classList
+        .remove(
+          "show"
+        );
+
+    }
+
+
+    document
+      .getElementById(
+        "sheetClose"
+      )
+
+      .addEventListener(
+        "click",
+        closeSheet
+      );
+
+
+    overlay.addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target === overlay
+        ) {
+
+          closeSheet();
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       RESIZE
+    ========================================== */
+
+    window.addEventListener(
+      "resize",
+      function() {
+
+        equalizeCardHeights();
+
+      }
+    );
+
+
+    /* ==========================================
+       START
+    ========================================== */
+
+    loadData();
+
+
+  </script>
+
+
+</body>
+
+</html>
