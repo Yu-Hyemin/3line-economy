@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-28",
+  "failed_articles": [
+    {
+      "title": "Vol. 19 아무나 맛볼 수 없는 달콤함 : 슈퍼리치들의 초고가 디저트 [THE RARE]",
+      "url": "https://v.daum.net/v/20261128070009331",
+      "stage": "article_body",
+      "reason_code": "ARTICLE_BODY_FAILED",
+      "reason": "기사 본문 수집 실패"
+    }
+  ]
+}
